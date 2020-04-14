@@ -3,9 +3,9 @@ package com.example.mygram.ui.objects
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.example.mygram.MainActivity
 import com.example.mygram.R
-import com.example.mygram.ui.SettingsFragment
+import com.example.mygram.ui.fragments.HelpFragment
+import com.example.mygram.ui.fragments.SettingsFragment
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.Drawer
@@ -98,7 +98,14 @@ class AppDrawer(val mainActivity: AppCompatActivity,val toolbar: Toolbar) {
                     when (position) {
                         7 ->   mainActivity.supportFragmentManager.beginTransaction()
                             .addToBackStack(null)
-                            .replace(R.id.dataContainer, SettingsFragment()).commit()
+                            .replace(R.id.dataContainer,
+                                SettingsFragment()
+                            ).commit()
+                        10 -> mainActivity.supportFragmentManager.beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.dataContainer,
+                                HelpFragment()
+                            ).commit()
                     }
                     return false
                 }
