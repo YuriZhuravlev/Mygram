@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorBackground">@color/colorAccent</item>
 
+        <item name="popupTheme">@style/actionMenu</item>
 
         <item name="material_drawer_background">@color/material_drawer_background</item>
         <item name="material_drawer_primary_text">@color/material_drawer_primary_text</item>
@@ -68,4 +69,8 @@
         <item name="android:background">@color/colorPrimary</item>
     </style>
 
+    <style name="actionMenu" parent="Theme.AppCompat.Light">
+        <item name="background">@color/colorAccent</item>
+        <item name="actionMenuTextColor">@color/colorPrimaryDark</item>
+    </style>
 </resources>
