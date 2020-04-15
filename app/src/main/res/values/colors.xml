@@ -21,6 +21,7 @@
     <color name="colorPrimaryDark">@color/nord0</color>
     <color name="colorAccent">@color/nord6</color>
     <color name="colorAccentDark">@color/nord5</color>
+    <color name="colorDark">@color/nord4</color>
     <color name="colorBlack">#000000</color>
 
 
