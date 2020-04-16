@@ -8,6 +8,8 @@ import com.example.mygram.activities.RegisterActivity
 import com.example.mygram.databinding.ActivityMainBinding
 import com.example.mygram.ui.fragments.ChatsFragment
 import com.example.mygram.ui.objects.AppDrawer
+import com.example.mygram.utilits.replaceActivity
+import com.example.mygram.utilits.replaceFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
@@ -35,13 +37,9 @@ class MainActivity : AppCompatActivity() {
         if (false) {
             setSupportActionBar(mToolbar)
             mAppDrawer.create()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.dataContainer,
-                    ChatsFragment()
-                ).commit()
+            replaceFragment(ChatsFragment())
         } else {
-            val intent =  Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+            replaceActivity(RegisterActivity())
         }
 
 

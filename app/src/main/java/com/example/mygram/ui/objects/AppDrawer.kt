@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar
 import com.example.mygram.R
 import com.example.mygram.ui.fragments.HelpFragment
 import com.example.mygram.ui.fragments.SettingsFragment
+import com.example.mygram.utilits.replaceFragment
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.Drawer
@@ -96,16 +97,8 @@ class AppDrawer(val mainActivity: AppCompatActivity,val toolbar: Toolbar) {
                     drawerItem: IDrawerItem<*>
                 ): Boolean {
                     when (position) {
-                        7 ->   mainActivity.supportFragmentManager.beginTransaction()
-                            .addToBackStack(null)
-                            .replace(R.id.dataContainer,
-                                SettingsFragment()
-                            ).commit()
-                        10 -> mainActivity.supportFragmentManager.beginTransaction()
-                            .addToBackStack(null)
-                            .replace(R.id.dataContainer,
-                                HelpFragment()
-                            ).commit()
+                        7 ->   mainActivity.replaceFragment(SettingsFragment())
+                        10 -> mainActivity.replaceFragment(HelpFragment())
                     }
                     return false
                 }
