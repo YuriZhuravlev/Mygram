@@ -1,8 +1,10 @@
 package com.example.mygram
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.example.mygram.activities.RegisterActivity
 import com.example.mygram.databinding.ActivityMainBinding
 import com.example.mygram.ui.fragments.ChatsFragment
 import com.example.mygram.ui.objects.AppDrawer
@@ -30,12 +32,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initFunc() {
-        setSupportActionBar(mToolbar)
-        mAppDrawer.create()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.dataContainer,
-                ChatsFragment()
-            ).commit()
+        if (false) {
+            setSupportActionBar(mToolbar)
+            mAppDrawer.create()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.dataContainer,
+                    ChatsFragment()
+                ).commit()
+        } else {
+            val intent =  Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
 
     }
 
