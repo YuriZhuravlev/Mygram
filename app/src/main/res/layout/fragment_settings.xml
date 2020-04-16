@@ -32,7 +32,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@color/colorAccent"
-            android:text="Yuri Zhuravlev"
+            android:text="UserName"
             android:textSize="@dimen/normalText"
             android:layout_marginTop="@dimen/vertical_margin"
             android:layout_marginStart="@dimen/horizontal_margin"
@@ -77,7 +77,7 @@
             android:id="@+id/settings_phone_number"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/settings_btn_change_number_phone"
-            android:text="89186361218"
+            android:text="89180000000"
             style="@style/normalText" />
 
         <TextView
@@ -104,7 +104,7 @@
             android:id="@+id/settings_login"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="'@Yuri_Zhuravlev"
+            android:text="UserName"
             style="@style/normalText" />
 
         <TextView

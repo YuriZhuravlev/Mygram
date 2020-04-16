@@ -29,8 +29,8 @@ class AppDrawer(val mainActivity: AppCompatActivity,val toolbar: Toolbar) {
             .withActivity(mainActivity)
             .withHeaderBackground(R.drawable.header)
             .addProfiles(
-                ProfileDrawerItem().withName("Yuri Zhuravlev")
-                    .withEmail("zhuravlevyuri2000@gmail.com")
+                ProfileDrawerItem().withName("UserName")
+                    .withEmail("username@username.com")
             ).build()
     }
 
