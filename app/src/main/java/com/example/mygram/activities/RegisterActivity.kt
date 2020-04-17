@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.example.mygram.R
 import com.example.mygram.databinding.ActivityRegisterBinding
 import com.example.mygram.ui.fragments.EnterPhoneNumberFragment
+import com.example.mygram.utilits.initFirebase
 import com.example.mygram.utilits.replaceFragment
 
 class RegisterActivity : AppCompatActivity() {
@@ -16,6 +17,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
+        initFirebase()
     }
 
     override fun onStart() {
@@ -23,6 +25,6 @@ class RegisterActivity : AppCompatActivity() {
         mToolbar = mBinding.registerToolbar
         setSupportActionBar(mToolbar)
         title = getString(R.string.register_title_your_phone)
-        replaceFragment(EnterPhoneNumberFragment())
+        replaceFragment(EnterPhoneNumberFragment(), false)
     }
 }
