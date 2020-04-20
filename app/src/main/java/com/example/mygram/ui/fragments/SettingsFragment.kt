@@ -8,6 +8,7 @@ import com.example.mygram.R
 import com.example.mygram.activities.RegisterActivity
 import com.example.mygram.utilits.AUTH
 import com.example.mygram.utilits.replaceActivity
+import com.example.mygram.utilits.replaceFragment
 
 class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
 
@@ -26,6 +27,8 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
                 AUTH.signOut()
                 (activity as MainActivity).replaceActivity(RegisterActivity())
             }
+
+            R.id.settings_menu_change_name -> replaceFragment(ChangeNameFragment())
         }
         return true
     }

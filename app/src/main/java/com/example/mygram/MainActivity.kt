@@ -6,13 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.mygram.activities.RegisterActivity
 import com.example.mygram.databinding.ActivityMainBinding
+import com.example.mygram.models.User
 import com.example.mygram.ui.fragments.ChatsFragment
 import com.example.mygram.ui.objects.AppDrawer
-import com.example.mygram.utilits.AUTH
-import com.example.mygram.utilits.initFirebase
-import com.example.mygram.utilits.replaceActivity
-import com.example.mygram.utilits.replaceFragment
+import com.example.mygram.utilits.*
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         mToolbar = mBinding.mainToolbar
         mAppDrawer = AppDrawer(this,mToolbar)
         initFirebase()
+        initUser()
     }
 
     private fun initFunc() {
@@ -49,4 +51,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun initUser() {
+        REF_DATABASE_ROOT.child(NODE_USERS).child(UID)
+            .addListenerForSingleValueEvent(AppValueEventListener{
+                USER = it.getValue(User::class.java) ?:  User()
+            })
+    }
 }
