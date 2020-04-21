@@ -12,6 +12,7 @@ import com.google.firebase.auth.PhoneAuthProvider
 import kotlinx.android.synthetic.main.fragment_enter_code.*
 import java.security.AuthProvider
 
+
 class EnterCodeFragment(val phoneNumber: String,val id: String) : Fragment(R.layout.fragment_enter_code) {
 
     override fun onStart() {
@@ -31,23 +32,32 @@ class EnterCodeFragment(val phoneNumber: String,val id: String) : Fragment(R.lay
         AUTH.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
                 val uid = AUTH.currentUser?.uid.toString()
-                var dateMap = mutableMapOf<String, Any>()
-                dateMap[CHILD_ID] = uid
-                dateMap[CHILD_PHONE] = phoneNumber
-                dateMap[CHILD_USERNAME] = phoneNumber
-
-                REF_DATABASE_ROOT.child(NODE_USERS).child(uid).updateChildren(dateMap)
-                    .addOnCompleteListener {task ->  
-                    if (task.isSuccessful) {
-                        showToast(getString(R.string.register_welcome))
-                        (activity as RegisterActivity).replaceActivity(MainActivity())
-                    } else showToast(task.exception?.message.toString())
-                }
-
-
+                REF_DATABASE_ROOT.child(NODE_USERS)
+                    .addListenerForSingleValueEvent(AppValueEventListener {users ->
+                        if (users.hasChild(uid)) {
+                            showToast(getString(R.string.register_welcome))
+                            (activity as RegisterActivity).replaceActivity(MainActivity())
+                        } else {
+                            registerUser(uid)
+                        }
+                    })
             } else {
                 showToast(it.exception?.message.toString())
             }
         }
+    }
+
+    private fun registerUser(uid: String) {
+        var dateMap = mutableMapOf<String, Any>()
+        dateMap[CHILD_ID] = uid
+        dateMap[CHILD_PHONE] = phoneNumber
+        dateMap[CHILD_USERNAME] = phoneNumber
+        REF_DATABASE_ROOT.child(NODE_USERS).child(uid).updateChildren(dateMap)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    showToast(getString(R.string.register_welcome))
+                    (activity as RegisterActivity).replaceActivity(MainActivity())
+                } else showToast(task.exception?.message.toString())
+            }
     }
 }

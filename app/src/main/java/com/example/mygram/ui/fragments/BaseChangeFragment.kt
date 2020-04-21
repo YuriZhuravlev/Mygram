@@ -6,21 +6,23 @@ import androidx.fragment.app.Fragment
 import com.example.mygram.MainActivity
 
 import com.example.mygram.R
+import com.example.mygram.utilits.APP_ACTIVITY
 
 open class BaseChangeFragment (layout: Int): Fragment(layout) {
 
     override fun onStart() {
         super.onStart()
         setHasOptionsMenu(true)
-        (activity as MainActivity).mAppDrawer.disableDrawer()
+        APP_ACTIVITY.mAppDrawer.disableDrawer()
     }
 
     override fun onStop() {
         super.onStop()
+        APP_ACTIVITY.hideKeyBoard()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        (activity as MainActivity).menuInflater.inflate(R.menu.settings_menu_confirm, menu)
+        APP_ACTIVITY.menuInflater.inflate(R.menu.settings_menu_confirm, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
