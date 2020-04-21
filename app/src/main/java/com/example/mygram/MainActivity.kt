@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 } else
-                    showToast(it.exception?.message.toString())
+                    showToast(task1.exception?.message.toString())
             }
         }
     }
