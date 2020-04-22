@@ -7,6 +7,7 @@ import com.example.mygram.MainActivity
 
 import com.example.mygram.R
 import com.example.mygram.utilits.APP_ACTIVITY
+import com.example.mygram.utilits.hideKeyBoard
 
 open class BaseChangeFragment (layout: Int): Fragment(layout) {
 
@@ -18,7 +19,7 @@ open class BaseChangeFragment (layout: Int): Fragment(layout) {
 
     override fun onStop() {
         super.onStop()
-        APP_ACTIVITY.hideKeyBoard()
+        hideKeyBoard()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
