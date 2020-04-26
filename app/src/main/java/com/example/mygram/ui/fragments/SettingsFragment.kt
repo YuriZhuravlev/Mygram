@@ -1,7 +1,6 @@
 package com.example.mygram.ui.fragments
 
 import android.app.Activity
-import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuInflater
@@ -9,9 +8,6 @@ import android.view.MenuItem
 import com.example.mygram.R
 import com.example.mygram.activities.RegisterActivity
 import com.example.mygram.utilits.*
-import com.example.mygram.utilits.replaceActivity
-import com.example.mygram.utilits.replaceFragment
-import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.fragment_settings.*
@@ -33,6 +29,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
         settings_btn_change_username.setOnClickListener {replaceFragment(ChangeUsernameFragment())}
         settings_btn_about.setOnClickListener { replaceFragment(ChangeBioFragment()) }
         settings_change_photo.setOnClickListener { changePhotoUser() }
+        settings_user_photo.downloadAndSetImage(USER.photoURL)
     }
 
     private fun changePhotoUser() {
@@ -68,29 +65,18 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
             val uri = CropImage.getActivityResult(data).uri
             val path = REF_STORAGE_ROOT.child(FOLDER_PROFILE_IMAGE)
                 .child(CURRENT_UID)
-            path.putFile(uri).addOnCompleteListener { task1 ->
-                if (task1.isSuccessful) {
-                    path.downloadUrl.addOnCompleteListener { task2 ->
-                        if (task2.isSuccessful) {
-                            val photoUrl = task2.result.toString()
-                            REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID)
-                                .child(CHILD_PHOTO_URL).setValue(photoUrl)
-                                .addOnCompleteListener {
-                                    if (it.isSuccessful) {
-                                        settings_user_photo.downloadAndSetImage(photoUrl)
-                                        showToast(getString(R.string.toast_data_update))
-                                        USER.photoURL = photoUrl
-                                    } else {
-                                        showToast(it.exception?.message.toString())
-                                    }
-                                }
-
-                        }
+            putImageToStorage(uri, path){
+                getUrlFromStorage(path){
+                    putUrlToDatabase(it){
+                        settings_user_photo.downloadAndSetImage(it)
+                        showToast(getString(R.string.toast_data_update))
+                        USER.photoURL = it
+                        APP_ACTIVITY.mAppDrawer.updateHeader()
                     }
-
-                } else
-                    showToast(task1.exception?.message.toString())
+                }
             }
         }
     }
+
+
 }

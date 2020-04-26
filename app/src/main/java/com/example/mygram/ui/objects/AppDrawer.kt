@@ -1,5 +1,9 @@
 package com.example.mygram.ui.objects
 
+import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.widget.ImageView
+import com.example.mygram.utilits.downloadAndSetImage
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -7,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.mygram.R
 import com.example.mygram.ui.fragments.HelpFragment
 import com.example.mygram.ui.fragments.SettingsFragment
+import com.example.mygram.utilits.USER
 import com.example.mygram.utilits.replaceFragment
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -16,13 +21,17 @@ import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
+import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader
+import com.mikepenz.materialdrawer.util.DrawerImageLoader
 
 class AppDrawer(val mainActivity: AppCompatActivity,val toolbar: Toolbar) {
     private lateinit var mDrawer: Drawer
     private lateinit var mHeader: AccountHeader
     private lateinit var mDrawerLayout: DrawerLayout
+    private lateinit var mCurrentProfile: ProfileDrawerItem
 
     fun create() {
+        initLoader()
         createHeader()
         createDrawer()
         mDrawerLayout = mDrawer.drawerLayout
@@ -47,13 +56,33 @@ class AppDrawer(val mainActivity: AppCompatActivity,val toolbar: Toolbar) {
     }
 
     private fun createHeader() {
+        mCurrentProfile = ProfileDrawerItem()
+            .withName(USER.fullname)
+            .withEmail(USER.phone)
+            .withIcon(USER.photoURL)
+            .withIdentifier(200)
         mHeader = AccountHeaderBuilder()
             .withActivity(mainActivity)
             .withHeaderBackground(R.drawable.header)
             .addProfiles(
-                ProfileDrawerItem().withName("UserName")
-                    .withEmail("username@username.com")
+                mCurrentProfile
             ).build()
+    }
+
+    fun updateHeader() {
+        mCurrentProfile
+            .withName(USER.fullname)
+            .withEmail(USER.phone)
+            .withIcon(USER.photoURL)
+        mHeader.updateProfile(mCurrentProfile)
+    }
+
+    private fun initLoader() {
+        DrawerImageLoader.init(object : AbstractDrawerImageLoader() {
+            override fun set(imageView: ImageView, uri: Uri, placeholder: Drawable){
+                imageView.downloadAndSetImage(uri.toString())
+            }
+        })
     }
 
     private fun createDrawer() {
