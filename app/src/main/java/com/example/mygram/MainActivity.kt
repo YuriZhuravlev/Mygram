@@ -1,8 +1,10 @@
 package com.example.mygram
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import com.example.mygram.activities.RegisterActivity
 import com.example.mygram.databinding.ActivityMainBinding
 import com.example.mygram.ui.fragments.ChatsFragment
@@ -21,8 +23,15 @@ class MainActivity : AppCompatActivity() {
         APP_ACTIVITY = this
         initFirebase()
         initUser(){
+            initContacts()
             initFields()
             initFunc()
+        }
+    }
+
+    private fun initContacts() {
+        if (checkPermission(READ_CONTACTS)) {
+            showToast("Чтение контакта")
         }
     }
 
@@ -49,5 +58,15 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         AppStates.updateStates(AppStates.OFFLINE)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (ContextCompat.checkSelfPermission(APP_ACTIVITY,READ_CONTACTS) == PackageManager.PERMISSION_GRANTED)
+            initContacts()
     }
 }
