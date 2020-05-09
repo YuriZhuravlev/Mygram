@@ -1,6 +1,8 @@
 package com.example.mygram.utilits
 
 import android.net.Uri
+import android.provider.ContactsContract
+import com.example.mygram.models.CommonModel
 import com.example.mygram.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -65,4 +67,24 @@ inline fun initUser(crossinline function: () -> Unit) {
             }
             function()
         })
+}
+
+fun initContacts() {
+    if (checkPermission(READ_CONTACTS)) {
+        var arrayContacts = arrayListOf<CommonModel>()
+        val cursor = APP_ACTIVITY.contentResolver.query(
+            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+            null, null, null, null);
+        cursor?.let {
+            while (it.moveToNext()) {
+                val fullname = it.getString(it.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+                val phone = it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                val newModel = CommonModel()
+                newModel.fullname = fullname
+                newModel.phone = phone.replace(Regex("[\\s,-,\\-,(,)]"),"")
+                arrayContacts.add(newModel)
+            }
+        }
+        cursor?.close()
+    }
 }

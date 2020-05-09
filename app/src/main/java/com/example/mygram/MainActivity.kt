@@ -10,6 +10,10 @@ import com.example.mygram.databinding.ActivityMainBinding
 import com.example.mygram.ui.fragments.ChatsFragment
 import com.example.mygram.ui.objects.AppDrawer
 import com.example.mygram.utilits.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
@@ -23,15 +27,10 @@ class MainActivity : AppCompatActivity() {
         APP_ACTIVITY = this
         initFirebase()
         initUser(){
-            initContacts()
+            CoroutineScope(Dispatchers.IO).launch { initContacts() }
+
             initFields()
             initFunc()
-        }
-    }
-
-    private fun initContacts() {
-        if (checkPermission(READ_CONTACTS)) {
-            showToast("Чтение контакта")
         }
     }
 
