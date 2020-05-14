@@ -32,4 +32,5 @@
     <string name="settings_hint_username">Username</string>
     <string name="settings_toast_username_exists">Такой пользователь уже существует</string>
     <string name="settings_hint_bio">Расскажите здесь о себе</string>
+    <string name="title_contacts">Контакты</string>
 </resources>

@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
     lateinit var mAppDrawer: AppDrawer
-    private lateinit var mToolbar: Toolbar
+    lateinit var mToolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initFields() {
         mToolbar = mBinding.mainToolbar
-        mAppDrawer = AppDrawer(this,mToolbar)
+        mAppDrawer = AppDrawer()
     }
 
     private fun initFunc() {
