@@ -7,7 +7,7 @@
     android:background="@color/colorPrimary">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/toolbar_image"
+        android:id="@+id/toolbar_chat_image"
         android:layout_width="@dimen/toolbar_image_width"
         android:layout_height="@dimen/toolbar_image_height"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -17,27 +17,27 @@
         app:civ_circle_background_color="@color/colorAccent"/>
 
     <TextView
-        android:id="@+id/toolbar_username"
+        android:id="@+id/toolbar_chat_username"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/colorAccent"
         tools:text="UserName"
         android:textSize="@dimen/normalText"
         android:layout_marginStart="@dimen/horizontal_margin"
-        app:layout_constraintTop_toTopOf="@id/toolbar_image"
-        app:layout_constraintStart_toEndOf="@id/toolbar_image"
+        app:layout_constraintTop_toTopOf="@id/toolbar_chat_image"
+        app:layout_constraintStart_toEndOf="@id/toolbar_chat_image"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
-        android:id="@+id/settings_status"
+        android:id="@+id/toolbar_chat_status"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/colorAccentDark"
         tools:text="в сети"
         android:textSize="@dimen/smallText"
         android:layout_marginStart="@dimen/horizontal_margin"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_username"
-        app:layout_constraintStart_toEndOf="@id/toolbar_image"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_chat_username"
+        app:layout_constraintStart_toEndOf="@id/toolbar_chat_image"
         app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

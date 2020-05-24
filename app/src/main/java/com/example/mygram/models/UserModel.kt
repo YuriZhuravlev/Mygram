@@ -2,7 +2,7 @@ package com.example.mygram.models
 
 import java.net.URL
 
-data class User(
+data class UserModel(
     val id:String = "",
     var username:String = "",
     var fullname: String = "",
