@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mygram.R
 import com.example.mygram.models.CommonModel
+import com.example.mygram.ui.fragments.single_chat.SingleChatFragment
 import com.example.mygram.utilits.*
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
@@ -59,7 +60,11 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
                     }
                     holder.status.text = contact.state
                     holder.photo.downloadAndSetImage(contact.photoURL)
-                    holder.itemView.setOnClickListener { replaceFragment(SingleChatFragment(model)) }
+                    holder.itemView.setOnClickListener { replaceFragment(
+                        SingleChatFragment(
+                            model
+                        )
+                    ) }
                 }
 
                 mRefUsers.addValueEventListener(mRefUsersListener)

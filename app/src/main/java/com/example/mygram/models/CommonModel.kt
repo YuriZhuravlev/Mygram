@@ -1,6 +1,5 @@
 package com.example.mygram.models
 
-import java.net.URL
 
 data class CommonModel(
     val id:String = "",
@@ -9,5 +8,10 @@ data class CommonModel(
     var bio: String = "",
     var state:String = "",
     var phone: String = "",
-    var photoURL:String = "empty"
+    var photoURL:String = "empty",
+
+    var text: String = "",
+    var type: String = "",
+    var from: String = "",
+    var timestamp: Any = 0
 )
