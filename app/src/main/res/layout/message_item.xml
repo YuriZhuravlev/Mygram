@@ -23,6 +23,7 @@
             android:gravity="end"
             android:padding="@dimen/appPadding"
             android:textColor="@color/colorBlack"
+            android:textIsSelectable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Hi! How are you?" />
@@ -53,9 +54,10 @@
             android:id="@+id/chat_received_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="end"
+            android:gravity="start"
             android:padding="@dimen/appPadding"
             android:textColor="@color/colorBlack"
+            android:textIsSelectable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Hi! How are you?" />

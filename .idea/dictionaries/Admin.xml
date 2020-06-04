@@ -2,6 +2,7 @@
   <dictionary name="Admin">
     <words>
       <w>fullname</w>
+      <w>mygram</w>
       <w>usernames</w>
     </words>
   </dictionary>

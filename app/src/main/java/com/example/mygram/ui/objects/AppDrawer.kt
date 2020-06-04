@@ -5,15 +5,13 @@ import android.net.Uri
 import android.widget.ImageView
 import com.example.mygram.utilits.downloadAndSetImage
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.mygram.R
 import com.example.mygram.ui.fragments.ContactsFragment
 import com.example.mygram.ui.fragments.HelpFragment
 import com.example.mygram.ui.fragments.SettingsFragment
 import com.example.mygram.utilits.APP_ACTIVITY
-import com.example.mygram.utilits.USER
+import com.example.mygram.database.USER
 import com.example.mygram.utilits.replaceFragment
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -157,9 +155,9 @@ class AppDrawer() {
 
     private fun clickToItem(position: Int) {
         when (position) {
-            4 -> APP_ACTIVITY.replaceFragment(ContactsFragment())
-            7 -> APP_ACTIVITY.replaceFragment(SettingsFragment())
-            10 -> APP_ACTIVITY.replaceFragment(HelpFragment())
+            4 -> replaceFragment(ContactsFragment())
+            7 -> replaceFragment(SettingsFragment())
+            10 -> replaceFragment(HelpFragment())
         }
     }
 }

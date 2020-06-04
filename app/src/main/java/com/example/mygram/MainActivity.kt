@@ -5,14 +5,16 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import com.example.mygram.activities.RegisterActivity
+import com.example.mygram.database.AUTH
+import com.example.mygram.database.initFirebase
+import com.example.mygram.database.initUser
 import com.example.mygram.databinding.ActivityMainBinding
-import com.example.mygram.ui.fragments.ChatsFragment
+import com.example.mygram.ui.fragments.MainFragment
+import com.example.mygram.ui.fragments.register.EnterPhoneNumberFragment
 import com.example.mygram.ui.objects.AppDrawer
 import com.example.mygram.utilits.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(mBinding.root)
         APP_ACTIVITY = this
         initFirebase()
-        initUser(){
+        initUser() {
             CoroutineScope(Dispatchers.IO).launch { initContacts() }
 
             initFields()
@@ -40,12 +42,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initFunc() {
+        setSupportActionBar(mToolbar)
         if (AUTH.currentUser != null) {
-            setSupportActionBar(mToolbar)
             mAppDrawer.create()
-            replaceFragment(ChatsFragment(), false)
+            replaceFragment(MainFragment(), false)
         } else {
-            replaceActivity(RegisterActivity())
+            replaceFragment(EnterPhoneNumberFragment(), false)
         }
     }
 

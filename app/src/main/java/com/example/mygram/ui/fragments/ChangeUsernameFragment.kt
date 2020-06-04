@@ -3,6 +3,7 @@ package com.example.mygram.ui.fragments
 import androidx.fragment.app.Fragment
 
 import com.example.mygram.R
+import com.example.mygram.database.*
 import com.example.mygram.utilits.*
 import kotlinx.android.synthetic.main.fragment_change_username.*
 import java.util.*
@@ -24,7 +25,9 @@ class ChangeUsernameFragment : BaseChangeFragment(R.layout.fragment_change_usern
         if (mUserName.isEmpty())
             showToast("Поле пустое!")
         else {
-            REF_DATABASE_ROOT.child(NODE_USERNAMES)
+            REF_DATABASE_ROOT.child(
+                NODE_USERNAMES
+            )
                 .addListenerForSingleValueEvent(AppValueEventListener {
                     if (it.hasChild(mUserName)) {
                         showToast(getString(R.string.settings_toast_username_exists))
@@ -36,36 +39,12 @@ class ChangeUsernameFragment : BaseChangeFragment(R.layout.fragment_change_usern
     }
 
     private fun changeUsername() {
-        REF_DATABASE_ROOT.child(NODE_USERNAMES).child(mUserName).setValue(CURRENT_UID)
+        REF_DATABASE_ROOT.child(NODE_USERNAMES).child(mUserName).setValue(
+            CURRENT_UID
+        )
             .addOnCompleteListener {
                 if (it.isSuccessful) {
-                    updateCurrentUsername()
-                } else {
-                    showToast(it.exception?.message.toString())
-                }
-            }
-    }
-
-    private fun updateCurrentUsername() {
-        REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_USERNAME)
-            .setValue(mUserName)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    deleteOldUsername()
-
-                } else {
-                    showToast(it.exception?.message.toString())
-                }
-            }
-    }
-
-    private fun deleteOldUsername() {
-        REF_DATABASE_ROOT.child(NODE_USERNAMES).child(USER.username).removeValue()
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    showToast(getString(R.string.toast_data_update))
-                    USER.username = mUserName
-                    fragmentManager?.popBackStack()
+                    updateCurrentUsername(mUserName)
                 } else {
                     showToast(it.exception?.message.toString())
                 }

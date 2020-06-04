@@ -8,7 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mygram.R
 import com.example.mygram.models.CommonModel
-import com.example.mygram.utilits.CURRENT_UID
+import com.example.mygram.database.CURRENT_UID
 import com.example.mygram.utilits.asTime
 import kotlinx.android.synthetic.main.message_item.view.*
 
