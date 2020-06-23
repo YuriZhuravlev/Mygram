@@ -26,7 +26,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
         settings_phone_number.text = USER.phone
         settings_status.text = USER.state
         settings_username.text = USER.username
-        settings_btn_change_username.setOnClickListener {replaceFragment(ChangeUsernameFragment())}
+        settings_btn_change_username.setOnClickListener { replaceFragment(ChangeUsernameFragment()) }
         settings_btn_about.setOnClickListener { replaceFragment(ChangeBioFragment()) }
         settings_change_photo.setOnClickListener { changePhotoUser() }
         settings_user_photo.downloadAndSetImage(USER.photoURL)
@@ -34,12 +34,11 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
 
     private fun changePhotoUser() {
         CropImage.activity()
-            .setAspectRatio(1,1)
-            .setRequestedSize(600,600)
+            .setAspectRatio(1, 1)
+            .setRequestedSize(250, 250)
             .setCropShape(CropImageView.CropShape.OVAL)
             .start(APP_ACTIVITY, this)
     }
-
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -47,7 +46,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.settings_menu_exit -> {
                 AppStates.updateStates(AppStates.OFFLINE)
                 AUTH.signOut()
@@ -62,11 +61,11 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE
-            && resultCode == Activity.RESULT_OK && data != null) {
+            && resultCode == Activity.RESULT_OK && data != null
+        ) {
             val uri = CropImage.getActivityResult(data).uri
-            val path = REF_STORAGE_ROOT.child(
-                FOLDER_PROFILE_IMAGE
-            )
+            val path = REF_STORAGE_ROOT
+                .child(FOLDER_PROFILE_IMAGE)
                 .child(CURRENT_UID)
             putImageToStorage(uri, path) {
                 getUrlFromStorage(path) {

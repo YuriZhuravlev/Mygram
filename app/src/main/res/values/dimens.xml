@@ -19,4 +19,5 @@
     <dimen name="appPadding">10dp</dimen>
     <dimen name="toolbar_image_width">45dp</dimen>
     <dimen name="toolbar_image_height">45dp</dimen>
+    <dimen name="chat_image_size">180dp</dimen>
 </resources>
