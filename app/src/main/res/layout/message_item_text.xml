@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:gravity="end"
             android:padding="@dimen/appPadding"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorChatText"
             android:textIsSelectable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/vertical_margin"
             android:gravity="end"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/timeColor"
             app:layout_constraintEnd_toEndOf="@id/chat_user_message"
             app:layout_constraintTop_toBottomOf="@id/chat_user_message"
             tools:text="12:00" />
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:gravity="start"
             android:padding="@dimen/appPadding"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorChatText"
             android:textIsSelectable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -70,61 +70,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/vertical_margin"
             android:gravity="end"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/timeColor"
             app:layout_constraintEnd_toEndOf="@id/chat_received_message"
             app:layout_constraintTop_toBottomOf="@id/chat_received_message"
-            tools:text="12:00" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/bloc_received_image_message"
-        android:layout_width="@dimen/chat_image_size"
-        android:layout_height="@dimen/chat_image_size"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/chat_received_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/chat_received_image_time"
-            style="@style/chat_image_time"
-            app:layout_constraintBottom_toBottomOf="@id/bloc_received_image_message"
-            app:layout_constraintEnd_toEndOf="@id/bloc_received_image_message"
-            tools:text="12:00" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/bloc_user_image_message"
-        android:layout_width="@dimen/chat_image_size"
-        android:layout_height="@dimen/chat_image_size"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/chat_user_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/chat_user_image_time"
-            style="@style/chat_image_time"
-            app:layout_constraintBottom_toBottomOf="@id/bloc_user_image_message"
-            app:layout_constraintEnd_toEndOf="@id/bloc_user_image_message"
             tools:text="12:00" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

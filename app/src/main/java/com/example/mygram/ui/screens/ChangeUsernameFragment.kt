@@ -1,4 +1,4 @@
-package com.example.mygram.ui.fragments
+package com.example.mygram.ui.screens
 
 import androidx.fragment.app.Fragment
 

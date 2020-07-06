@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/appPadding">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bloc_received_voice_message"
+        android:layout_width="@dimen/chat_voice_size_width"
+        android:layout_height="@dimen/chat_voice_size_height"
+        android:background="@drawable/bg_receiving_message"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/chat_received_btn_play"
+            android:layout_width="@dimen/btn_chat_voice_size"
+            android:layout_height="@dimen/btn_chat_voice_size"
+            android:src="@drawable/ic_play"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/chat_received_btn_stop"
+            android:visibility="gone"
+            android:layout_width="@dimen/btn_chat_voice_size"
+            android:layout_height="@dimen/btn_chat_voice_size"
+            android:src="@drawable/ic_stop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/chat_received_voice_time"
+            style="@style/chat_time"
+            app:layout_constraintBottom_toBottomOf="@id/bloc_received_voice_message"
+            app:layout_constraintEnd_toEndOf="@id/bloc_received_voice_message"
+            tools:text="12:00" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bloc_user_voice_message"
+        android:layout_width="@dimen/chat_voice_size_width"
+        android:layout_height="@dimen/chat_voice_size_height"
+        android:background="@drawable/bg_user_message"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/chat_user_btn_play"
+            android:layout_width="@dimen/btn_chat_voice_size"
+            android:layout_height="@dimen/btn_chat_voice_size"
+            android:src="@drawable/ic_play"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/chat_user_btn_stop"
+            android:visibility="gone"
+            android:layout_width="@dimen/btn_chat_voice_size"
+            android:layout_height="@dimen/btn_chat_voice_size"
+            android:src="@drawable/ic_stop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/chat_user_voice_time"
+            style="@style/chat_time"
+            app:layout_constraintBottom_toBottomOf="@id/bloc_user_voice_message"
+            app:layout_constraintEnd_toEndOf="@id/bloc_user_voice_message"
+            tools:text="12:00" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

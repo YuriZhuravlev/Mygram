@@ -22,9 +22,12 @@
     <color name="colorAccent">@color/nord6</color>
     <color name="colorAccentDark">@color/nord5</color>
     <color name="colorDark">@color/nord4</color>
-    <color name="colorBgMessage">@color/nord9</color>
+    <color name="colorBgMessageUser">@color/nord2</color>
+    <color name="colorBgMessageReceived">@color/nord1</color>
     <color name="colorChatBackground">@color/nord3 </color>
     <color name="colorBlack">#000000</color>
+    <color name="colorChatText">@color/nord4</color>
+    <color name="timeColor">@color/nord7</color>
 
 
     <!-- OVERWRITE THESE COLORS FOR A LIGHT THEME -->

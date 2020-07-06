@@ -20,4 +20,7 @@
     <dimen name="toolbar_image_width">45dp</dimen>
     <dimen name="toolbar_image_height">45dp</dimen>
     <dimen name="chat_image_size">180dp</dimen>
+    <dimen name="chat_voice_size_width">180dp</dimen>
+    <dimen name="chat_voice_size_height">50dp</dimen>
+    <dimen name="btn_chat_voice_size">50dp</dimen>
 </resources>

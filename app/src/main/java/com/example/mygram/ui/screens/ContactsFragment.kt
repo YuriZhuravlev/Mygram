@@ -1,4 +1,4 @@
-package com.example.mygram.ui.fragments
+package com.example.mygram.ui.screens
 
 
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mygram.R
 import com.example.mygram.database.*
 import com.example.mygram.models.CommonModel
-import com.example.mygram.ui.fragments.single_chat.SingleChatFragment
+import com.example.mygram.ui.screens.single_chat.SingleChatFragment
 import com.example.mygram.utilits.*
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions

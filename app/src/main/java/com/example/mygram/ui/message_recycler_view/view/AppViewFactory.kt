@@ -1,0 +1,33 @@
+package com.example.mygram.ui.message_recycler_view.view
+
+import com.example.mygram.models.CommonModel
+import com.example.mygram.utilits.TYPE_MESSAGE_IMAGE
+import com.example.mygram.utilits.TYPE_MESSAGE_VOICE
+
+class AppViewFactory {
+    companion object {
+        fun getView(message: CommonModel): MessageView {
+            return when (message.type) {
+                TYPE_MESSAGE_IMAGE -> ViewImageMessage(
+                    message.id,
+                    message.from,
+                    message.timestamp.toString(),
+                    message.fileUrl
+                )
+                TYPE_MESSAGE_VOICE -> ViewVoiceMessage(
+                    message.id,
+                    message.from,
+                    message.timestamp.toString(),
+                    message.fileUrl
+                )
+                else -> ViewTextMessage(
+                    message.id,
+                    message.from,
+                    message.timestamp.toString(),
+                    message.fileUrl,
+                    message.text
+                )
+            }
+        }
+    }
+}

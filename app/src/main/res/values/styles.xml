@@ -87,10 +87,10 @@
         <item name="android:inputType">phone</item>
     </style>
 
-    <style name="chat_image_time">
+    <style name="chat_time">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/timeColor</item>
         <item name="android:shadowColor">@color/colorPrimary</item>
         <item name="android:shadowRadius">1</item>
         <item name="android:gravity">end</item>

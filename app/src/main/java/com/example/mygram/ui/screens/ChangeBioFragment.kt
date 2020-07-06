@@ -1,8 +1,7 @@
-package com.example.mygram.ui.fragments
+package com.example.mygram.ui.screens
 
 import com.example.mygram.R
 import com.example.mygram.database.*
-import com.example.mygram.utilits.*
 import kotlinx.android.synthetic.main.fragment_change_bio.*
 
 class ChangeBioFragment : BaseChangeFragment(R.layout.fragment_change_bio) {

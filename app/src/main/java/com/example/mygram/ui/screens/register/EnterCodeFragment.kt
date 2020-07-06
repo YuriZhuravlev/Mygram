@@ -1,4 +1,4 @@
-package com.example.mygram.ui.fragments.register
+package com.example.mygram.ui.screens.register
 
 import androidx.fragment.app.Fragment
 
@@ -46,21 +46,28 @@ class EnterCodeFragment(val phoneNumber: String,val id: String) : Fragment(R.lay
     }
 
     private fun registerUser(uid: String) {
-        var dateMap = mutableMapOf<String, Any>()
+        val dateMap = mutableMapOf<String, Any>()
         dateMap[CHILD_ID] = uid
         dateMap[CHILD_PHONE] = phoneNumber
-        dateMap[CHILD_USERNAME] = phoneNumber
-        REF_DATABASE_ROOT.child(NODE_PHONES).child(phoneNumber).setValue(uid)
-            .addOnFailureListener { showToast(it.message.toString()) }
-            .addOnSuccessListener {
-                REF_DATABASE_ROOT.child(
-                    NODE_USERS
-                ).child(uid).updateChildren(dateMap)
-                    .addOnFailureListener { it.message.toString() }
-                    .addOnCompleteListener {
-                        showToast(getString(R.string.register_welcome))
-                        restartActivity()
+
+        REF_DATABASE_ROOT.child(NODE_USERS).child(uid)
+            .addListenerForSingleValueEvent(AppValueEventListener(){
+                if (!it.hasChild(CHILD_USERNAME)) {
+                    dateMap[CHILD_USERNAME] = phoneNumber
+                }
+
+                REF_DATABASE_ROOT.child(NODE_PHONES).child(phoneNumber).setValue(uid)
+                    .addOnFailureListener { showToast(it.message.toString()) }
+                    .addOnSuccessListener {
+                        REF_DATABASE_ROOT.child(
+                            NODE_USERS
+                        ).child(uid).updateChildren(dateMap)
+                            .addOnFailureListener { it.message.toString() }
+                            .addOnCompleteListener {
+                                showToast(getString(R.string.register_welcome))
+                                restartActivity()
+                            }
                     }
-            }
+            })
     }
 }

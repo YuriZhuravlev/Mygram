@@ -1,4 +1,4 @@
-package com.example.mygram.ui.fragments
+package com.example.mygram.ui.screens
 
 import com.example.mygram.R
 import com.example.mygram.database.*
