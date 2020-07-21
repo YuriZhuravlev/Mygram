@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/appPadding">
+    android:padding="@dimen/app_padding">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bloc_received_voice_message"
