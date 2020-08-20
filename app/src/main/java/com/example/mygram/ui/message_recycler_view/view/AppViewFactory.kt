@@ -1,6 +1,7 @@
 package com.example.mygram.ui.message_recycler_view.view
 
 import com.example.mygram.models.CommonModel
+import com.example.mygram.utilits.TYPE_MESSAGE_FILE
 import com.example.mygram.utilits.TYPE_MESSAGE_IMAGE
 import com.example.mygram.utilits.TYPE_MESSAGE_VOICE
 
@@ -19,6 +20,13 @@ class AppViewFactory {
                     message.from,
                     message.timestamp.toString(),
                     message.fileUrl
+                )
+                TYPE_MESSAGE_FILE -> ViewFileMessage(
+                    message.id,
+                    message.from,
+                    message.timestamp.toString(),
+                    message.fileUrl,
+                    message.text
                 )
                 else -> ViewTextMessage(
                     message.id,

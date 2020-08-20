@@ -23,7 +23,7 @@
     <color name="colorAccentDark">@color/nord5</color>
     <color name="colorDark">@color/nord4</color>
     <color name="colorBgMessageUser">@color/nord2</color>
-    <color name="colorBgMessageReceived">@color/nord1</color>
+    <color name="colorBgMessageReceived">@color/nord2</color>
     <color name="colorChatBackground">@color/nord3 </color>
     <color name="colorBlack">#000000</color>
     <color name="colorChatText">@color/nord4</color>
