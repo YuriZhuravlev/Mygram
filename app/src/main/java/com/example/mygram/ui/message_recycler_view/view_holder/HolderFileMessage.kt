@@ -10,10 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mygram.database.CURRENT_UID
 import com.example.mygram.database.getFileFromStorage
 import com.example.mygram.ui.message_recycler_view.view.MessageView
-import com.example.mygram.utilits.WRITE_FILES
-import com.example.mygram.utilits.asTime
-import com.example.mygram.utilits.checkPermission
-import com.example.mygram.utilits.showToast
+import com.example.mygram.utilits.*
 import kotlinx.android.synthetic.main.message_item_file.view.*
 import java.io.File
 
@@ -65,13 +62,16 @@ class HolderFileMessage(view: View) : RecyclerView.ViewHolder(view), MessageHold
             chatReceivedDownload.visibility = View.INVISIBLE
             chatReceivedProgressBar.visibility = View.VISIBLE
         }
-        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-        view.text)
+        val file = File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+            view.text
+        )
+
         try {
-            if (checkPermission(WRITE_FILES)) {
+            if (checkPermission(WRITE_FILES)){
                 file.createNewFile()
-                getFileFromStorage(file, view.fileUrl) {
-                    if (view.from == CURRENT_UID) {
+                getFileFromStorage(file,view.fileUrl){
+                    if (view.from == CURRENT_UID){
                         chatUserDownload.visibility = View.VISIBLE
                         chatUserProgressBar.visibility = View.INVISIBLE
                     } else {
@@ -80,7 +80,7 @@ class HolderFileMessage(view: View) : RecyclerView.ViewHolder(view), MessageHold
                     }
                 }
             }
-        }catch (e: Exception) {
+        }catch (e:Exception){
             showToast(e.message.toString())
         }
     }
