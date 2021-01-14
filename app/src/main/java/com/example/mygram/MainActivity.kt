@@ -9,7 +9,7 @@ import com.example.mygram.database.AUTH
 import com.example.mygram.database.initFirebase
 import com.example.mygram.database.initUser
 import com.example.mygram.databinding.ActivityMainBinding
-import com.example.mygram.ui.screens.MainFragment
+import com.example.mygram.ui.screens.main_list.MainListFragment
 import com.example.mygram.ui.screens.register.EnterPhoneNumberFragment
 import com.example.mygram.ui.objects.AppDrawer
 import com.example.mygram.utilits.*
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(mToolbar)
         if (AUTH.currentUser != null) {
             mAppDrawer.create()
-            replaceFragment(MainFragment(), false)
+            replaceFragment(MainListFragment(), false)
         } else {
             replaceFragment(EnterPhoneNumberFragment(), false)
         }
