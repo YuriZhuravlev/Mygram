@@ -4,8 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import android.view.MotionEvent
-import android.view.View
+import android.view.*
 import android.widget.AbsListView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -19,6 +18,7 @@ import com.example.mygram.models.CommonModel
 import com.example.mygram.models.UserModel
 import com.example.mygram.ui.screens.BaseFragment
 import com.example.mygram.ui.message_recycler_view.view.AppViewFactory
+import com.example.mygram.ui.screens.main_list.MainListFragment
 import com.example.mygram.utilits.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.database.DatabaseReference
@@ -63,6 +63,7 @@ class SingleChatFragment(private val contact: CommonModel) :
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initFields() {
+        setHasOptionsMenu(true)
         mBottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet_choice)
         mBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         mAppVoiceRecorder = AppVoiceRecorder()
@@ -264,4 +265,24 @@ class SingleChatFragment(private val contact: CommonModel) :
         mAppVoiceRecorder.releaseRecord()
         mAdapter.onDestroy()
     }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        activity?.menuInflater?.inflate(R.menu.single_chat_action_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_clear_chat -> clearChat(contact.id) {
+                replaceFragment(SingleChatFragment(contact))
+            }
+
+            R.id.menu_delete_chat -> deleteChat(contact.id) {
+                showToast(getString(R.string.chat_deleted))
+                replaceFragment(MainListFragment())
+            }
+        }
+        return true
+    }
+
 }

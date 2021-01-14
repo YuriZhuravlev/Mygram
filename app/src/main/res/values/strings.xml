@@ -34,4 +34,7 @@
     <string name="settings_hint_bio">Расскажите здесь о себе</string>
     <string name="title_contacts">Контакты</string>
     <string name="message_hint">Сообщение</string>
+    <string name="clear_char">Очистить чат</string>
+    <string name="delete_chat">Удалить чат</string>
+    <string name="chat_deleted">Чат удален</string>
 </resources>

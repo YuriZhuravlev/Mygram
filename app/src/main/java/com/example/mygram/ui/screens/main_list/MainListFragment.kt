@@ -44,7 +44,9 @@ class MainListFragment : Fragment(R.layout.fragment_main_list) {
                     mRefMessages.child(model.id).limitToLast(1)
                         .addListenerForSingleValueEvent(AppValueEventListener {
                             val tmpList = it.children.map { it.getCommonModel() }
-                            newModel.lastMessage = tmpList[0].text
+                            if (tmpList.isNotEmpty()) {
+                                newModel.lastMessage = tmpList[0].text
+                            }
                             if (newModel.fullname.isEmpty()) {
                                 newModel.fullname = newModel.phone
                             }

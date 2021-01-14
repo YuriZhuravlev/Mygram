@@ -9,7 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.mygram.R
 import com.example.mygram.ui.screens.ContactsFragment
 import com.example.mygram.ui.screens.HelpFragment
-import com.example.mygram.ui.screens.SettingsFragment
+import com.example.mygram.ui.screens.settings.SettingsFragment
 import com.example.mygram.utilits.APP_ACTIVITY
 import com.example.mygram.database.USER
 import com.example.mygram.utilits.replaceFragment
