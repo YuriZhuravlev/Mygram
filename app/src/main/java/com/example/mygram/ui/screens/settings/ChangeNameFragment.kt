@@ -2,7 +2,7 @@ package com.example.mygram.ui.screens.settings
 
 import com.example.mygram.R
 import com.example.mygram.database.*
-import com.example.mygram.ui.screens.BaseChangeFragment
+import com.example.mygram.ui.screens.base.BaseChangeFragment
 import com.example.mygram.utilits.*
 import kotlinx.android.synthetic.main.fragment_change_name.*
 

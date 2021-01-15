@@ -1,7 +1,6 @@
 package com.example.mygram.ui.screens.single_chat
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.view.*
@@ -16,7 +15,7 @@ import com.example.mygram.R
 import com.example.mygram.database.*
 import com.example.mygram.models.CommonModel
 import com.example.mygram.models.UserModel
-import com.example.mygram.ui.screens.BaseFragment
+import com.example.mygram.ui.screens.base.BaseFragment
 import com.example.mygram.ui.message_recycler_view.view.AppViewFactory
 import com.example.mygram.ui.screens.main_list.MainListFragment
 import com.example.mygram.utilits.*

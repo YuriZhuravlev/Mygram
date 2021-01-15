@@ -7,7 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import com.example.mygram.R
 import com.example.mygram.database.*
-import com.example.mygram.ui.screens.BaseFragment
+import com.example.mygram.ui.screens.base.BaseFragment
 import com.example.mygram.utilits.*
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
