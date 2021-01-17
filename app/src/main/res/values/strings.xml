@@ -10,7 +10,6 @@
     <string name="menu_item8">Пригласить друзей</string>
     <string name="menu_item9">Вопросы о Mygram</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="settings_text_account">Аккаунт</string>
     <string name="settings_label_phone_number">Нажмите, чтобы изменить номер телефона</string>
@@ -37,4 +36,13 @@
     <string name="clear_char">Очистить чат</string>
     <string name="delete_chat">Удалить чат</string>
     <string name="chat_deleted">Чат удален</string>
+    <string name="add_contacts_title">Добавить участников</string>
+    <string name="create_group_title">Создать группу</string>
+    <string name="add_contact_toast_empty_list">Добавьте участников!</string>
+    <plurals name="count_members">
+        <item quantity="one">%d участник</item>
+        <item quantity="few">%d участника</item>
+        <item quantity="many">%d участников</item>
+        <item quantity="other">%d участников</item>
+    </plurals>
 </resources>
