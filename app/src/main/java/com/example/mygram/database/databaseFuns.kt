@@ -6,6 +6,7 @@ import com.example.mygram.models.CommonModel
 import com.example.mygram.models.UserModel
 import com.example.mygram.utilits.APP_ACTIVITY
 import com.example.mygram.utilits.AppValueEventListener
+import com.example.mygram.utilits.TYPE_GROUP
 import com.example.mygram.utilits.showToast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -14,6 +15,7 @@ import com.google.firebase.database.ServerValue
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
+import java.util.HashMap
 
 fun initFirebase() {
     AUTH =
@@ -117,6 +119,32 @@ public fun sendMessage(
 
     REF_DATABASE_ROOT
         .updateChildren(mapDialog)
+        .addOnSuccessListener { function() }
+        .addOnFailureListener { showToast(it.message.toString()) }
+}
+
+public fun sendMessageToGroup(
+    message: String,
+    groupID: String,
+    typeText: String,
+    function: () -> Unit
+) {
+    val refMessages = "$NODE_GROUPS/$groupID/$NODE_MESSAGES"
+    val messageKey = REF_DATABASE_ROOT.child(refMessages).push().key
+
+    val mapMessage = hashMapOf<String, Any>()
+    mapMessage[CHILD_FROM] =
+        CURRENT_UID
+    mapMessage[CHILD_TYPE] = typeText
+    mapMessage[CHILD_TEXT] = message
+    mapMessage[CHILD_ID] = messageKey.toString()
+    mapMessage[CHILD_TIMESTAMP] =
+        ServerValue.TIMESTAMP
+
+    REF_DATABASE_ROOT
+        .child(refMessages)
+        .child(messageKey.toString())
+        .updateChildren(mapMessage)
         .addOnSuccessListener { function() }
         .addOnFailureListener { showToast(it.message.toString()) }
 }
@@ -309,19 +337,42 @@ fun createGroupToDatabase(
         mapMembers[it.id] = USER_MEMBER
     }
     mapMembers[CURRENT_UID] = USER_CREATOR
-
     mapData[NODE_MEMBERS_GROUP] = mapMembers
+    mapData[CHILD_PHOTO_URL] = "empty"
     path.updateChildren(mapData)
         .addOnSuccessListener {
             if (uri != Uri.EMPTY) {
                 putFileToStorage(uri, pathStorage) {
                     getUrlFromStorage(pathStorage) {
-                        path.child(CHILD_FILE_URL).setValue(it)
+                        path.child(CHILD_PHOTO_URL).setValue(it)
+                        addGroupToMainList(mapData, listContacts) {
+                            function()
+                        }
                     }
                 }
+            } else {
+                addGroupToMainList(mapData, listContacts) {
+                    function()
+                }
             }
-            function()
         }
         .addOnFailureListener { it.message }
+}
+
+fun addGroupToMainList(
+    mapData: HashMap<String, Any>,
+    listContacts: List<CommonModel>,
+    function: () -> Unit
+) {
+    val path = REF_DATABASE_ROOT.child(NODE_MAIN_LIST)
+    val map = hashMapOf<String, Any>()
+    map[CHILD_ID] = mapData[CHILD_ID].toString()
+    map[CHILD_TYPE] = TYPE_GROUP
+    listContacts.forEach {
+        path.child(it.id).child(map[CHILD_ID].toString()).updateChildren(map)
+    }
+    path.child(CURRENT_UID).child(map[CHILD_ID].toString()).updateChildren(map)
+        .addOnSuccessListener { function() }
+        .addOnFailureListener { showToast(it.message.toString()) }
 }
 

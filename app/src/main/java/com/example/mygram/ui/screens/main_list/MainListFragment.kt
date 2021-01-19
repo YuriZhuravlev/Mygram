@@ -5,9 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mygram.R
 import com.example.mygram.database.*
 import com.example.mygram.models.CommonModel
-import com.example.mygram.utilits.APP_ACTIVITY
-import com.example.mygram.utilits.AppValueEventListener
-import com.example.mygram.utilits.hideKeyBoard
+import com.example.mygram.utilits.*
 import kotlinx.android.synthetic.main.fragment_main_list.*
 
 class MainListFragment : Fragment(R.layout.fragment_main_list) {
@@ -16,6 +14,7 @@ class MainListFragment : Fragment(R.layout.fragment_main_list) {
     private lateinit var mAdapter: MainListAdapter
     private val mRefMainList = REF_DATABASE_ROOT.child(NODE_MAIN_LIST).child(CURRENT_UID)
     private val mRefUsers = REF_DATABASE_ROOT.child(NODE_USERS)
+    private val mRefGroups = REF_DATABASE_ROOT.child(NODE_GROUPS)
     private val mRefMessages = REF_DATABASE_ROOT.child(NODE_MESSAGES).child(CURRENT_UID)
     private var mListItems = listOf<CommonModel>()
 
@@ -36,26 +35,54 @@ class MainListFragment : Fragment(R.layout.fragment_main_list) {
             mListItems = it.children.map { it.getCommonModel() }
             mListItems.forEach { model ->
 
-                // 2 запрос
-                mRefUsers.child(model.id).addListenerForSingleValueEvent(AppValueEventListener {
-                    val newModel = it.getCommonModel()
-
-                    // 3 запрос
-                    mRefMessages.child(model.id).limitToLast(1)
-                        .addListenerForSingleValueEvent(AppValueEventListener {
-                            val tmpList = it.children.map { it.getCommonModel() }
-                            if (tmpList.isNotEmpty()) {
-                                newModel.lastMessage = tmpList[0].text
-                            }
-                            if (newModel.fullname.isEmpty()) {
-                                newModel.fullname = newModel.phone
-                            }
-                            mAdapter.updateListItems(newModel)
-                        })
-                })
+                when (model.type) {
+                    TYPE_CHAT -> {
+                        showChat(model)
+                    }
+                    TYPE_GROUP -> {
+                        showGroup(model)
+                    }
+                }
             }
         })
 
         mRecyclerView.adapter = mAdapter
+    }
+
+    private fun showGroup(model: CommonModel) {
+        mRefGroups.child(model.id).addListenerForSingleValueEvent(AppValueEventListener {
+            val newModel = it.getCommonModel()
+
+            mRefGroups.child(model.id).child(NODE_MESSAGES)
+                .limitToLast(1)
+                .addListenerForSingleValueEvent(AppValueEventListener {
+                    val tmpList = it.children.map { it.getCommonModel() }
+                    if (tmpList.isNotEmpty()) {
+                        newModel.lastMessage = tmpList[0].text
+                    }
+                    newModel.fullname = newModel.username
+                    newModel.type = TYPE_GROUP
+                    mAdapter.updateListItems(newModel)
+                })
+        })
+    }
+
+    private fun showChat(model: CommonModel) {
+        mRefUsers.child(model.id).addListenerForSingleValueEvent(AppValueEventListener {
+            val newModel = it.getCommonModel()
+
+            mRefMessages.child(model.id).limitToLast(1)
+                .addListenerForSingleValueEvent(AppValueEventListener {
+                    val tmpList = it.children.map { it.getCommonModel() }
+                    if (tmpList.isNotEmpty()) {
+                        newModel.lastMessage = tmpList[0].text
+                    }
+                    if (newModel.fullname.isEmpty()) {
+                        newModel.fullname = newModel.phone
+                    }
+                    newModel.type = TYPE_CHAT
+                    mAdapter.updateListItems(newModel)
+                })
+        })
     }
 }

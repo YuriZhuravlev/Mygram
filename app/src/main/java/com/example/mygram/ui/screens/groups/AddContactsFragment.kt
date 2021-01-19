@@ -1,6 +1,5 @@
 package com.example.mygram.ui.screens.groups
 
-import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mygram.R
 import com.example.mygram.database.*
@@ -13,7 +12,7 @@ class AddContactsFragment : BaseFragment(R.layout.fragment_add_contacts) {
 
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: AddContactsAdapter
-    private val mRefMainList = REF_DATABASE_ROOT.child(NODE_MAIN_LIST).child(CURRENT_UID)
+    private val mRefContactsList = REF_DATABASE_ROOT.child(NODE_PHONES_CONTACTS).child(CURRENT_UID)
     private val mRefUsers = REF_DATABASE_ROOT.child(NODE_USERS)
     private var mListItems = listOf<CommonModel>()
 
@@ -37,12 +36,10 @@ class AddContactsFragment : BaseFragment(R.layout.fragment_add_contacts) {
         mRecyclerView = add_contact_recycler_view
         mAdapter = AddContactsAdapter()
 
-        // 1 запрос
-        mRefMainList.addListenerForSingleValueEvent(AppValueEventListener {
+        mRefContactsList.addListenerForSingleValueEvent(AppValueEventListener {
             mListItems = it.children.map { it.getCommonModel() }
             mListItems.forEach { model ->
 
-                // 2 запрос
                 mRefUsers.child(model.id).addListenerForSingleValueEvent(AppValueEventListener {
                     val newModel = it.getCommonModel()
 
@@ -51,6 +48,7 @@ class AddContactsFragment : BaseFragment(R.layout.fragment_add_contacts) {
                     }
                     mAdapter.updateListItems(newModel)
                 })
+
             }
         })
 
