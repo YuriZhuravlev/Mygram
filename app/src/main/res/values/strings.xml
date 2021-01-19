@@ -39,6 +39,7 @@
     <string name="add_contacts_title">Добавить участников</string>
     <string name="create_group_title">Создать группу</string>
     <string name="add_contact_toast_empty_list">Добавьте участников!</string>
+    <string name="toast_input_name_group">Введите название группы!</string>
     <plurals name="count_members">
         <item quantity="one">%d участник</item>
         <item quantity="few">%d участника</item>
